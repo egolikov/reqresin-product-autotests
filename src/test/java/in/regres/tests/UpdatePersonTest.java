@@ -1,7 +1,7 @@
 package in.regres.tests;
 
-import in.regres.models.UpdatePersonBodyModel;
-import in.regres.models.UpdatePersonResponseModel;
+import in.regres.models.updatePerson.UpdatePersonBodyModel;
+import in.regres.models.updatePerson.UpdatePersonResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

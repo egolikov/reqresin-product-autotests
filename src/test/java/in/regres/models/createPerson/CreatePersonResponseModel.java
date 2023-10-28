@@ -1,4 +1,4 @@
-package in.regres.models;
+package in.regres.models.createPerson;
 
 import lombok.Data;
 

@@ -1,8 +1,8 @@
 package in.regres.tests;
 
-import in.regres.models.ListResourcesDataResponseModel;
-import in.regres.models.ListResourcesResponseModel;
-import in.regres.models.ListResourcesSupportResponseModel;
+import in.regres.models.listResorces.ListResourcesDataResponseModel;
+import in.regres.models.listResorces.ListResourcesResponseModel;
+import in.regres.models.listResorces.ListResourcesSupportResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

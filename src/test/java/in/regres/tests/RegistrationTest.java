@@ -1,8 +1,8 @@
 package in.regres.tests;
 
-import in.regres.models.RegistrationBodyModel;
-import in.regres.models.RegistrationErrorModel;
-import in.regres.models.RegistrationResponseModel;
+import in.regres.models.registration.RegistrationBodyModel;
+import in.regres.models.registration.RegistrationErrorModel;
+import in.regres.models.registration.RegistrationResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

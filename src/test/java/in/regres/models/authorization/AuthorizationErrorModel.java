@@ -1,4 +1,4 @@
-package in.regres.models;
+package in.regres.models.authorization;
 
 import lombok.Data;
 

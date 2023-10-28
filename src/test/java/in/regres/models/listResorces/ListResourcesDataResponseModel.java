@@ -1,4 +1,4 @@
-package in.regres.models;
+package in.regres.models.listResorces;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
