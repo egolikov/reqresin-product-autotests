@@ -6,6 +6,7 @@ import in.regres.models.authorization.AuthorizationBodyModel;
 import in.regres.models.authorization.AuthorizationErrorModel;
 import in.regres.models.authorization.AuthorizationResponseModel;
 import in.regres.tests.asserts.AuthorizationsAsserts;
+import in.regres.tests.data.TestData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +16,10 @@ public class AuthorizationTest {
 
     AuthorizationApi authorizationApi = new AuthorizationApi();
 
-
-    String email = "eve.holt@reqres.in";
-    String password = "cityslicka";
-    String undefinedEmail = "egolikov@gmail.com";
-    String undefinedPassword = "gogogo";
+    String email = TestData.EMAIL;
+    String password = TestData.PASSWORD;
+    String undefinedEmail = TestData.UNDEFINED_EMAIL;
+    String undefinedPassword = TestData.UNDEFINED_PASSWORD;
 
     @Test
     @DisplayName("Проверка успешной авторизации с Email и Password")
