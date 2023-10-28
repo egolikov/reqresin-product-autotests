@@ -24,7 +24,7 @@ public class AuthorizationApi {
                 .as(AuthorizationResponseModel.class);
     }
 
-    @Description("Отправка запроса на Авторизацию")
+    @Description("Отправка запроса с ошибкой на Авторизацию")
     public AuthorizationErrorModel errorAuth(AuthorizationBodyModel requestData) {
         return given()
                 .spec(AuthorizationSpec.authorizationRequestSpec)
