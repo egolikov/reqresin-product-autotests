@@ -8,9 +8,9 @@ repositories {
     mavenCentral()
 }
 
-def restAssuredVersion = "5.3.1",
-    allureVersion = "2.21.0",
-    slf4jVersion = "2.0.7"
+def restAssuredVersion = "5.3.1"
+def allureVersion = "2.21.0"
+def slf4jVersion = "2.0.7"
 
 allure {
     report {
@@ -47,12 +47,54 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
 
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
+task Smoke_Test(type: Test) {
+    useJUnitPlatform {
+        includeTags "Smoke"
+    }
+}
+
+task Authorization_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "Authorization"
+    }
+}
+
+task CreatePerson_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "CreatePerson"
+    }
+}
+
+task DeletePerson_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "DeletePerson"
+    }
+}
+
+task ListResources_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "ListResources"
+    }
+}
+
+task ListPersons_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "ListPersons"
+    }
+}
+
+task Registration_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "Registration"
+    }
+}
+
+task UpdatePerson_test(type: Test) {
+    useJUnitPlatform {
+        includeTags "UpdatePerson"
     }
 }
 

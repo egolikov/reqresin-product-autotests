@@ -47,7 +47,10 @@ public class UpdatePersonTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("UpdatePerson")
     @DisplayName("Проверка успешного обновления данных пользователя через метод PATCH")
     void successfulUpdatePersonWithPatchMethodTest() {
 

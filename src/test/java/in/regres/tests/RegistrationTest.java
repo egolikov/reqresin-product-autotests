@@ -48,7 +48,10 @@ public class RegistrationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Registration")
     @DisplayName("Проверка неуспешной регистрации без Email")
     void registrationWithOutEmailTest() {
 
@@ -65,7 +68,10 @@ public class RegistrationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Registration")
     @DisplayName("Проверка неуспешной регистрации без Password")
     void registrationWithOutPasswordTest() {
 
@@ -82,7 +88,10 @@ public class RegistrationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Registration")
     @DisplayName("Проверка неуспешной регистрации с данными неизвестного пользователя")
     void undefinedUserRegistrationTest() {
 
