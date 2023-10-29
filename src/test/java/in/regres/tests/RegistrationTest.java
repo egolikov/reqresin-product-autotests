@@ -1,80 +1,74 @@
 package in.regres.tests;
 
+import com.google.gson.Gson;
+import in.regres.api.RegistrationApi;
 import in.regres.models.registration.RegistrationBodyModel;
 import in.regres.models.registration.RegistrationErrorModel;
 import in.regres.models.registration.RegistrationResponseModel;
+import in.regres.tests.asserts.RegistrationAsserts;
+import in.regres.tests.data.TestData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static in.regres.specs.RegistrationSpec.*;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegistrationTest {
 
-    @DisplayName("Проверка успешной регистрации с Email и Password")
+    String email = TestData.REG_EMAIL;
+    String password = TestData.REG_PASSWORD;
+    String undefinedEmail = TestData.REG_UNDEFINED_EMAIL;
+    String undefinedPassword = TestData.REG_UNDEFINED_PASSWORD;
+
+    RegistrationApi registrationApi = new RegistrationApi();
+
     @Test
+    @DisplayName("Проверка успешной регистрации с Email и Password")
     void successfulRegistrationTest() {
 
-        RegistrationBodyModel regData = new RegistrationBodyModel();
-        regData.setEmail("eve.holt@reqres.in");
-        regData.setPassword("pistol");
+        step("Отправка запроса на регистрацию с корретным Email и Password", () -> {
+            RegistrationBodyModel requestData = new RegistrationBodyModel(email, password);
+            RegistrationResponseModel response = registrationApi.successRegistration(requestData);
+            System.setProperty("successfulRegistrationResponse", new Gson().toJson(response));
+        });
 
-        RegistrationResponseModel response = step("Отправляем запрос на успешную Регистрацию", () ->
-                given(registrationRequestSpec)
-                        .body(regData)
-                        .when()
-                        .post("/register")
-                        .then()
-                        .spec(registrationResponseSpec)
-                        .extract().as(RegistrationResponseModel.class));
-
-        step("Проверка ответа на запрос об успешной Регистрации", () -> {
-            assertEquals(4, response.getId());
-            assertEquals("QpwL5tke4Pnpja7X4", response.getToken());
+        step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
+            String responseJson = System.getProperty("successfulRegistrationResponse");
+            RegistrationResponseModel response = new Gson().fromJson(responseJson, RegistrationResponseModel.class);
+            RegistrationAsserts.validateResponseWithToken(response);
         });
     }
 
     @Test
-    @DisplayName("Проверка неспешной регистрации без Email")
+    @DisplayName("Проверка неуспешной регистрации без Email")
     void registrationWithOutEmailTest() {
 
-        RegistrationBodyModel noneEmailData = new RegistrationBodyModel();
-        noneEmailData.setPassword("pistol");
+        step("Отправка запроса на регистрацию без Email", () -> {
+            RegistrationBodyModel requestData = new RegistrationBodyModel(null, password);
+            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
+            System.setProperty("errorRegWithoutEmailResponse", new Gson().toJson(response));
+        });
 
-        RegistrationErrorModel response = step("Отправляем запрос без Email на регистрацию", () ->
-                given(registrationRequestSpec)
-                        .body(noneEmailData)
-                        .when()
-                        .post("/register")
-                        .then()
-                        .spec(errorRegistrationResponseSpec)
-                        .extract().as(RegistrationErrorModel.class));
-
-        step("Проверка ответа с ошибкой на запрос Регистрации", () -> {
-            assertEquals("Missing email or username", response.getError());
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            String responseJson = System.getProperty("errorRegWithoutEmailResponse");
+            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
+            RegistrationAsserts.validateResponseErrorWithoutEmail(response);
         });
     }
 
     @Test
-    @DisplayName("Проверка неспешной регистрации без Password")
+    @DisplayName("Проверка неуспешной регистрации без Password")
     void registrationWithOutPasswordTest() {
 
-        RegistrationBodyModel nonePasswordData = new RegistrationBodyModel();
-        nonePasswordData.setEmail("eve.holt@reqres.in");
+        step("Отправка запроса на регистрацию без Password", () -> {
+            RegistrationBodyModel requestData = new RegistrationBodyModel(email, null);
+            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
+            System.setProperty("errorRegWithoutPasswordResponse", new Gson().toJson(response));
+        });
 
-        RegistrationErrorModel response = step("Отправляем запрос без Password на регистрацию", () ->
-                given(registrationRequestSpec)
-                        .body(nonePasswordData)
-                        .when()
-                        .post("/register")
-                        .then()
-                        .spec(errorRegistrationResponseSpec)
-                        .extract().as(RegistrationErrorModel.class));
-
-        step("Проверка ответа с ошибкой на запрос Регистрации", () -> {
-            assertEquals("Missing password", response.getError());
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            String responseJson = System.getProperty("errorRegWithoutPasswordResponse");
+            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
+            RegistrationAsserts.validateResponseErrorWithoutPassword(response);
         });
     }
 
@@ -82,21 +76,16 @@ public class RegistrationTest {
     @DisplayName("Проверка неуспешной регистрации с данными неизвестного пользователя")
     void undefinedUserRegistrationTest() {
 
-        RegistrationBodyModel undefinedUserData = new RegistrationBodyModel();
-        undefinedUserData.setEmail("egolikov@gmail.com");
-        undefinedUserData.setPassword("gogogo");
+        step("Отправка запроса на Регистрацию с неизвестным пользователем", () -> {
+            RegistrationBodyModel requestData = new RegistrationBodyModel(undefinedEmail, undefinedPassword);
+            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
+            System.setProperty("errorRegWithUndefinedData", new Gson().toJson(response));
+        });
 
-        RegistrationErrorModel response = step("Отправляем запрос с неизвестным Юзером на регистрацию", () ->
-                given(registrationRequestSpec)
-                        .body(undefinedUserData)
-                        .when()
-                        .post("/register")
-                        .then()
-                        .spec(errorRegistrationResponseSpec)
-                        .extract().as(RegistrationErrorModel.class));
-
-        step("Проверка ответа с ошибкой на запрос Регистрации", () -> {
-            assertEquals("Note: Only defined users succeed registration", response.getError());
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            String responseJson = System.getProperty("errorRegWithUndefinedData");
+            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
+            RegistrationAsserts.validateResponseErrorWithUndefinedData(response);
         });
     }
 }

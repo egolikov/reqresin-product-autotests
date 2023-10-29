@@ -14,10 +14,10 @@ import static io.qameta.allure.Allure.step;
 
 public class AuthorizationTest {
 
-    String email = TestData.EMAIL;
-    String password = TestData.PASSWORD;
-    String undefinedEmail = TestData.UNDEFINED_EMAIL;
-    String undefinedPassword = TestData.UNDEFINED_PASSWORD;
+    String email = TestData.AUTH_EMAIL;
+    String password = TestData.AUTH_PASSWORD;
+    String undefinedEmail = TestData.AUTH_UNDEFINED_EMAIL;
+    String undefinedPassword = TestData.AUTH_UNDEFINED_PASSWORD;
 
     AuthorizationApi authorizationApi = new AuthorizationApi();
 
@@ -76,7 +76,7 @@ public class AuthorizationTest {
     @DisplayName("Проверка неуспешной авторизации с данными неизвестного пользователя")
     void undefinedUserAuthorizationTest() {
 
-        step("Отправка запроса на авторизацию без Password", () -> {
+        step("Отправка запроса на Авторизацию с неизвестным пользователем", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(undefinedEmail, undefinedPassword);
             AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
             System.setProperty("errorAuthWithUndefinedData", new Gson().toJson(response));
