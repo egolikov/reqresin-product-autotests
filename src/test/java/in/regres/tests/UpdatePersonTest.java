@@ -13,7 +13,6 @@ import static io.qameta.allure.Allure.step;
 
 public class UpdatePersonTest {
 
-
     String name = TestData.UPDATE_NAME;
     String job = TestData.UPDATE_JOB;
     String nameO = TestData.ONE_MORE_UPDATE_NAME;
