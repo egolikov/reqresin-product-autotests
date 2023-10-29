@@ -7,11 +7,18 @@ import in.regres.models.registration.RegistrationErrorModel;
 import in.regres.models.registration.RegistrationResponseModel;
 import in.regres.tests.asserts.RegistrationAsserts;
 import in.regres.tests.data.TestData;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Owner("Голиков Евгений")
+@Epic(value = "Тестирование API приложения Reqres.in")
+@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Story("Регистрация")
 public class RegistrationTest {
 
     String email = TestData.REG_EMAIL;
@@ -21,7 +28,10 @@ public class RegistrationTest {
 
     RegistrationApi registrationApi = new RegistrationApi();
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Registration")
     @DisplayName("Проверка успешной регистрации с Email и Password")
     void successfulRegistrationTest() {
 

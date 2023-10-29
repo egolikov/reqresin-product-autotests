@@ -6,11 +6,18 @@ import in.regres.models.updatePerson.UpdatePersonBodyModel;
 import in.regres.models.updatePerson.UpdatePersonResponseModel;
 import in.regres.tests.asserts.UpdatePersonAsserts;
 import in.regres.tests.data.TestData;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Owner("Голиков Евгений")
+@Epic(value = "Тестирование API приложения Reqres.in")
+@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Story("Обновление сотрудников")
 public class UpdatePersonTest {
 
     String name = TestData.UPDATE_NAME;
@@ -20,7 +27,10 @@ public class UpdatePersonTest {
 
     UpdatePersonApi updatePersonApi = new UpdatePersonApi();
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("UpdatePerson")
     @DisplayName("Проверка успешного обновления данных пользователя через метод PUT")
     void successfulUpdatePersonWithPutMethodTest() {
 

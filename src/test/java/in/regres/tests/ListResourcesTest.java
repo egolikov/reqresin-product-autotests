@@ -4,16 +4,26 @@ import com.google.gson.Gson;
 import in.regres.api.ListResourcesApi;
 import in.regres.models.listResorces.ListResourcesResponseModel;
 import in.regres.tests.asserts.ListResourcesAsserts;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Owner("Голиков Евгений")
+@Epic(value = "Тестирование API приложения Reqres.in")
+@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Story("Лист ресурсов")
 public class ListResourcesTest {
 
     ListResourcesApi listResourcesApi = new ListResourcesApi();
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("ListResources")
     @DisplayName("Проверка успешного получения списка ресурсов")
     void successfulFetchListResourcesTest() {
 

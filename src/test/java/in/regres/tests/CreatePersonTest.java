@@ -6,11 +6,18 @@ import in.regres.models.createPerson.CreatePersonBodyModel;
 import in.regres.models.createPerson.CreatePersonResponseModel;
 import in.regres.tests.asserts.CreatePersonAsserts;
 import in.regres.tests.data.TestData;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Owner("Голиков Евгений")
+@Epic(value = "Тестирование API приложения Reqres.in")
+@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Story("Создание сотрудника")
 public class CreatePersonTest {
 
     String name = TestData.CREATE_NAME;
@@ -18,7 +25,10 @@ public class CreatePersonTest {
 
     CreatePersonApi createPersonApi = new CreatePersonApi();
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("CreatePerson")
     @DisplayName("Проверка успешного создания сотрудника с Name и Job")
     void successfulCreatePersonTest() {
 
@@ -35,7 +45,10 @@ public class CreatePersonTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("CreatePerson")
     @DisplayName("Проверка успешного создания сотрудника без Name")
     void successfulCreatePersonWithoutName() {
 
@@ -52,7 +65,10 @@ public class CreatePersonTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("CreatePerson")
     @DisplayName("Проверка успешного создания сотрудника без Job")
     void successfulCreatePersonWithoutJob() {
 

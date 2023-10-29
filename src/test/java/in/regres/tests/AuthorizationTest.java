@@ -7,11 +7,18 @@ import in.regres.models.authorization.AuthorizationErrorModel;
 import in.regres.models.authorization.AuthorizationResponseModel;
 import in.regres.tests.asserts.AuthorizationsAsserts;
 import in.regres.tests.data.TestData;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Owner("Голиков Евгений")
+@Epic(value = "Тестирование API приложения Reqres.in")
+@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Story("Авторизация")
 public class AuthorizationTest {
 
     String email = TestData.AUTH_EMAIL;
@@ -21,7 +28,10 @@ public class AuthorizationTest {
 
     AuthorizationApi authorizationApi = new AuthorizationApi();
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Authorization")
     @DisplayName("Проверка успешной авторизации с Email и Password")
     void successfulAuthorizationTest() {
 
@@ -38,7 +48,10 @@ public class AuthorizationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Authorization")
     @DisplayName("Проверка неуспешной авторизации без Email")
     void authorizationWithOutEmailTest() {
 
@@ -55,7 +68,10 @@ public class AuthorizationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Authorization")
     @DisplayName("Проверка неуспешной авторизации без Password")
     void authorizationWithOutPasswordTest() {
 
@@ -72,7 +88,10 @@ public class AuthorizationTest {
         });
     }
 
+    @Severity(NORMAL)
     @Test
+    @Tag("Smoke")
+    @Tag("Authorization")
     @DisplayName("Проверка неуспешной авторизации с данными неизвестного пользователя")
     void undefinedUserAuthorizationTest() {
 
