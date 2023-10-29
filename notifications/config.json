@@ -1,0 +1,17 @@
+{
+  "base": {
+    "logo": "",
+    "project": "baucenter",
+    "environment": "Test",
+    "comment": "test-results",
+    "reportLink": "https://baucenter.ru",
+    "language": "en",
+    "allureFolder": "build/reports/allure-report/allureReport",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "6471401020:AAFK3SoItsi6qzkOESXATp-jLqStaaQsBOI",
+    "chat": "-1001937165281",
+    "replyTo": ""
+  }
+}
