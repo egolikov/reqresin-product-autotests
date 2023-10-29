@@ -13,8 +13,8 @@ import static io.qameta.allure.Allure.step;
 
 public class CreatePersonTest {
 
-    String name = TestData.NAME;
-    String job = TestData.JOB;
+    String name = TestData.CREATE_NAME;
+    String job = TestData.CREATE_JOB;
 
     CreatePersonApi createPersonApi = new CreatePersonApi();
 

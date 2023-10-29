@@ -1,40 +1,40 @@
 package in.regres.tests;
 
+import com.google.gson.Gson;
+import in.regres.api.UpdatePersonApi;
 import in.regres.models.updatePerson.UpdatePersonBodyModel;
 import in.regres.models.updatePerson.UpdatePersonResponseModel;
+import in.regres.tests.asserts.UpdatePersonAsserts;
+import in.regres.tests.data.TestData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static in.regres.specs.UpdatePersonSpec.updatePersonRequestSpec;
-import static in.regres.specs.UpdatePersonSpec.updatePersonResponseSpec;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UpdatePersonTest {
+
+
+    String name = TestData.UPDATE_NAME;
+    String job = TestData.UPDATE_JOB;
+    String nameO = TestData.ONE_MORE_UPDATE_NAME;
+    String jobO = TestData.ONE_MORE_UPDATE_JOB;
+
+    UpdatePersonApi updatePersonApi = new UpdatePersonApi();
 
     @Test
     @DisplayName("Проверка успешного обновления данных пользователя через метод PUT")
     void successfulUpdatePersonWithPutMethodTest() {
 
-        UpdatePersonBodyModel updatePersonData = new UpdatePersonBodyModel();
-        updatePersonData.setName("mike");
-        updatePersonData.setJob("developer");
+        step("Отправка запроса на обновление данных пользователя", () -> {
+            UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(name, job);
+            UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPut(requestData);
+            System.setProperty("successfulUpdatePutPersonResponse", new Gson().toJson(response));
+        });
 
-        UpdatePersonResponseModel response = step("Обновление Имени и Должности сотрудника", () ->
-                given(updatePersonRequestSpec)
-                        .body(updatePersonData)
-                        .when()
-                        .put("/users/2")
-                        .then()
-                        .spec(updatePersonResponseSpec)
-                        .extract().as(UpdatePersonResponseModel.class));
-
-        step("Проверка ответа на запрос об успешном обновлении сотрудника", () -> {
-            assertEquals("mike", response.getName());
-            assertEquals("developer", response.getJob());
-            assertNotNull(response.getUpdatedAt());
+        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
+            String responseJson = System.getProperty("successfulUpdatePutPersonResponse");
+            UpdatePersonResponseModel response = new Gson().fromJson(responseJson, UpdatePersonResponseModel.class);
+            UpdatePersonAsserts.validateResponseUpdatePut(response);
         });
     }
 
@@ -42,23 +42,16 @@ public class UpdatePersonTest {
     @DisplayName("Проверка успешного обновления данных пользователя через метод PATCH")
     void successfulUpdatePersonWithPatchMethodTest() {
 
-        UpdatePersonBodyModel updatePersonData = new UpdatePersonBodyModel();
-        updatePersonData.setName("oleg");
-        updatePersonData.setJob("designer");
+        step("Отправка запроса на обновление данных пользователя", () -> {
+            UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(nameO, jobO);
+            UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPatch(requestData);
+            System.setProperty("successfulUpdatePatchPersonResponse", new Gson().toJson(response));
+        });
 
-        UpdatePersonResponseModel response = step("Обновление Имени и Должности сотрудника", () ->
-                given(updatePersonRequestSpec)
-                        .body(updatePersonData)
-                        .when()
-                        .patch("/users/2")
-                        .then()
-                        .spec(updatePersonResponseSpec)
-                        .extract().as(UpdatePersonResponseModel.class));
-
-        step("Проверка ответа на запрос об успешном обновлении сотрудника", () -> {
-            assertEquals("oleg", response.getName());
-            assertEquals("designer", response.getJob());
-            assertNotNull(response.getUpdatedAt());
+        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
+            String responseJson = System.getProperty("successfulUpdatePatchPersonResponse");
+            UpdatePersonResponseModel response = new Gson().fromJson(responseJson, UpdatePersonResponseModel.class);
+            UpdatePersonAsserts.validateResponseUpdatePatch(response);
         });
     }
 }
