@@ -1,25 +1,19 @@
 package in.regres.tests;
 
+import in.regres.api.DeletePersonApi;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static in.regres.specs.DeletePersonSpec.deletePersonRequestSpec;
-import static in.regres.specs.DeletePersonSpec.deletePersonResponseSpec;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
 
 public class DeletePersonTest {
+
+    DeletePersonApi deletePersonApi = new DeletePersonApi();
 
     @Test
     @DisplayName("Проверка успешного удаления сотрудника")
     void successfulDeletePersonTest() {
 
-        step("Удаление сотрудника", () -> {
-            given()
-                    .spec(deletePersonRequestSpec)
-                    .delete("/users/2")
-                    .then()
-                    .spec(deletePersonResponseSpec);
-        });
+        step("Отправка запроса на успешное удаление сотрудника", () -> deletePersonApi.deletePerson());
     }
 }
