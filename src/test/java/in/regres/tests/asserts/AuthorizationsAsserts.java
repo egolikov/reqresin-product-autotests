@@ -12,7 +12,7 @@ public class AuthorizationsAsserts {
     public static void validateResponseWithToken(AuthorizationResponseModel authorizationResponseModel) {
 
         assertThat(authorizationResponseModel.getToken())
-                .as("Значение полученного токена из ошибки верное")
+                .as("Значение полученного токена из ответа верное")
                 .isEqualTo("QpwL5tke4Pnpja7X4");
     }
 

@@ -14,12 +14,12 @@ import static io.qameta.allure.Allure.step;
 
 public class AuthorizationTest {
 
-    AuthorizationApi authorizationApi = new AuthorizationApi();
-
     String email = TestData.EMAIL;
     String password = TestData.PASSWORD;
     String undefinedEmail = TestData.UNDEFINED_EMAIL;
     String undefinedPassword = TestData.UNDEFINED_PASSWORD;
+
+    AuthorizationApi authorizationApi = new AuthorizationApi();
 
     @Test
     @DisplayName("Проверка успешной авторизации с Email и Password")

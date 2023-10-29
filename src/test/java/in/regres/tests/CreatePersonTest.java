@@ -1,88 +1,71 @@
 package in.regres.tests;
 
+import com.google.gson.Gson;
+import in.regres.api.CreatePersonApi;
 import in.regres.models.createPerson.CreatePersonBodyModel;
 import in.regres.models.createPerson.CreatePersonResponseModel;
+import in.regres.tests.asserts.CreatePersonAsserts;
+import in.regres.tests.data.TestData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static in.regres.specs.CreatePersonSpec.createPersonRequestSpec;
-import static in.regres.specs.CreatePersonSpec.createPersonResponseSpec;
 import static io.qameta.allure.Allure.step;
-import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CreatePersonTest {
+
+    String name = TestData.NAME;
+    String job = TestData.JOB;
+
+    CreatePersonApi createPersonApi = new CreatePersonApi();
 
     @Test
     @DisplayName("Проверка успешного создания сотрудника с Name и Job")
     void successfulCreatePersonTest() {
 
-        CreatePersonBodyModel createPersonData = new CreatePersonBodyModel();
-        createPersonData.setName("morpheus");
-        createPersonData.setJob("leader");
+        step("Отправка запроса на создание сотрудника с Name и Job", () -> {
+            CreatePersonBodyModel requestData = new CreatePersonBodyModel(name, job);
+            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
+            System.setProperty("successfulCreatePersonResponse", new Gson().toJson(response));
+        });
 
-        CreatePersonResponseModel response = step("Создание сотрудника с Именем и Должностью", () ->
-                given(createPersonRequestSpec)
-                        .body(createPersonData)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(createPersonResponseSpec)
-                        .extract().as(CreatePersonResponseModel.class));
-
-        step("Проверка ответа на запрос об успешном создании сотрудника", () -> {
-            assertEquals("morpheus", response.getName());
-            assertEquals("leader", response.getJob());
-            assertNotNull(response.getId());
-            assertNotNull(response.getCreatedAt());
+        step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
+            String responseJson = System.getProperty("successfulCreatePersonResponse");
+            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
+            CreatePersonAsserts.validateResponseWithNameAndJob(response);
         });
     }
 
     @Test
     @DisplayName("Проверка успешного создания сотрудника без Name")
-    void createPersonWithOutNameTest() {
+    void successfulCreatePersonWithoutName() {
 
-        CreatePersonBodyModel noneNameData = new CreatePersonBodyModel();
-        noneNameData.setJob("leader");
+        step("Отправка запроса на создание сотрудника без Name", () -> {
+            CreatePersonBodyModel requestData = new CreatePersonBodyModel(null, job);
+            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
+            System.setProperty("successfulCreatePersonWithoutNameResponse", new Gson().toJson(response));
+        });
 
-        CreatePersonResponseModel response = step("Создание сотрудника без Имени", () ->
-                given(createPersonRequestSpec)
-                        .body(noneNameData)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(createPersonResponseSpec)
-                        .extract().as(CreatePersonResponseModel.class));
-
-        step("Проверка ответа на запрос об успешном создании сотрудника без Имени", () -> {
-            assertNull(response.getName());
-            assertEquals("leader", response.getJob());
-            assertNotNull(response.getId());
-            assertNotNull(response.getCreatedAt());
+        step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
+            String responseJson = System.getProperty("successfulCreatePersonWithoutNameResponse");
+            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
+            CreatePersonAsserts.validateResponseWithoutName(response);
         });
     }
 
     @Test
     @DisplayName("Проверка успешного создания сотрудника без Job")
-    void createPersonWithOutJobTest() {
+    void successfulCreatePersonWithoutJob() {
 
-        CreatePersonBodyModel noneJobData = new CreatePersonBodyModel();
-        noneJobData.setName("morpheus");
+        step("Отправка запроса на создание сотрудника без Job", () -> {
+            CreatePersonBodyModel requestData = new CreatePersonBodyModel(name, null);
+            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
+            System.setProperty("successfulCreatePersonWithoutJobResponse", new Gson().toJson(response));
+        });
 
-        CreatePersonResponseModel response = step("Создание сотрудника без Работы", () ->
-                given(createPersonRequestSpec)
-                        .body(noneJobData)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(createPersonResponseSpec)
-                        .extract().as(CreatePersonResponseModel.class));
-
-        step("Проверка ответа на запрос об успешном создании сотрудника без Работы", () -> {
-            assertEquals("morpheus", response.getName());
-            assertNull(response.getJob());
-            assertNotNull(response.getId());
-            assertNotNull(response.getCreatedAt());
+        step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
+            String responseJson = System.getProperty("successfulCreatePersonWithoutJobResponse");
+            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
+            CreatePersonAsserts.validateResponseWithoutJob(response);
         });
     }
 }
