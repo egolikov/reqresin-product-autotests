@@ -74,25 +74,25 @@
 gradle clean test 
 ```
 
-## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/> </a>Интеграция с <a target="_blank" href="https://jenkins.autotests.cloud/job/baucenter-product-autotests-egolikov/7/allure/">Allure Report</a>
+## <img alt="Allure" height="25" src="images/logo/Allure.svg" width="25"/> </a>Интеграция с <a target="_blank" href="https://jenkins.autotests.cloud/job/reqresin-product-autotests/5/allure/">Allure Report</a>
 
 ## 🖨️ Основная страница отчёта
 
 <p align="center">  
-<img title="Allure Overview Dashboard" src="images/screen/AllureOwer.png" width="850">  
+<img title="Allure Overview Dashboard" src="images/screen/AlMain.png" width="850">  
 </p>  
 
 ## 📄 Тест-кейсы
 
 <p align="center">  
-<img title="Allure Tests" src="images/screen/AllureCases.png" width="850">   
+<img title="Allure Tests" src="images/screen/AlCases.png" width="850">   
 </p>
 
 ## 📊 Графики
 
 <p align="center">   
-<img title="Allure Graphics1" src="images/screen/AllureG1.png" width="850">  
-<img title="Allure Graphics2" src="images/screen/AllureG2.png" width="850">  
+<img title="Allure Graphics1" src="images/screen/AlGraph1.png" width="850">  
+<img title="Allure Graphics2" src="images/screen/AlGraph2.png" width="850">  
 </p>
 
 ## <img alt="Allure_TO" height="25" src="images/logo/Allure_TO.svg" width="25"/> </a>Интеграция с <a target="_blank" href="https://allure.autotests.cloud/project/3669/dashboards">Allure TestOps</a>
