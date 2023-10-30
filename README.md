@@ -95,24 +95,24 @@ gradle clean test
 <img title="Allure Graphics2" src="images/screen/AlGraph2.png" width="850">  
 </p>
 
-## <img alt="Allure_TO" height="25" src="images/logo/Allure_TO.svg" width="25"/> </a>Интеграция с <a target="_blank" href="https://allure.autotests.cloud/project/3669/dashboards">Allure TestOps</a>
+## <img alt="Allure_TO" height="25" src="images/logo/Allure_TO.svg" width="25"/> </a>Интеграция с <a target="_blank" href="https://allure.autotests.cloud/project/3737/dashboards">Allure TestOps</a>
 
 ## 🖨️ Основная страница отчёта
 
 <p align="center">  
-<img title="Allure TestOps Dashboard" src="images/screen/OpsDash.png" width="850">  
+<img title="Allure TestOps Dashboard" src="images/screen/OpsDashboard.png" width="850">  
 </p>  
 
-## 📄 Авто и Ручные тест-кейсы
+## 📄 Автоматизированные тест-кейсы
 
 <p align="center">  
-<img title="Allure Tests" src="images/screen/OpsCases.png" width="850">  
+<img title="Allure Tests" src="images/screen/OpsTestCases.png" width="850">  
 </p>
 
-## <img alt="Allure" height="25" src="images/logo/Jira.svg" width="25"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/HOMEWORK-884">Jira</a>
+## <img alt="Allure" height="25" src="images/logo/Jira.svg" width="25"/></a> Интеграция с <a target="_blank" href="https://jira.autotests.cloud/browse/HOMEWORK-922">Jira</a>
 
 <p align="center">  
-<img title="Jira" src="images/screen/JiraSc.png" width="">  
+<img title="Jira" src="images/screen/JiraMain.png" width="">  
 </p>
 
 ____
@@ -121,15 +121,7 @@ ____
 
 ____
 <p align="center">  
-<img title="Allure Overview Dashboard" src="images/screen/Teleg.png" width="550">  
+<img title="TG Overview" src="images/screen/TGMain.png" width="550">  
 </p>
 
 ____
-
-## <img alt="Selenoid" height="25" src="images/logo/Selenoid.svg" width="25"/></a> Видеопример выполнения теста на Selenoid
-
-____
-<p align="center">
-<img title="Selenoid Video" src="images/screen/VideoSe.gif" width="550" height="350"  alt="video">   
-</p>
-
