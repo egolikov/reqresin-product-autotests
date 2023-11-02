@@ -20,12 +20,12 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Обновление сотрудников")
 public class UpdatePersonTest {
 
-    String name = TestData.UPDATE_NAME;
-    String job = TestData.UPDATE_JOB;
-    String nameO = TestData.ONE_MORE_UPDATE_NAME;
-    String jobO = TestData.ONE_MORE_UPDATE_JOB;
+    private final String name = TestData.UPDATE_NAME;
+    private final String job = TestData.UPDATE_JOB;
+    private final String nameO = TestData.ONE_MORE_UPDATE_NAME;
+    private final String jobO = TestData.ONE_MORE_UPDATE_JOB;
 
-    UpdatePersonApi updatePersonApi = new UpdatePersonApi();
+    protected UpdatePersonApi updatePersonApi = new UpdatePersonApi();
 
     @Severity(NORMAL)
     @Test

@@ -6,6 +6,6 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class UpdatePersonBodyModel {
-    String name;
-    String job;
+    private String name;
+    private String job;
 }

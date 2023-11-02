@@ -15,7 +15,7 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Удаление сотрудника")
 public class DeletePersonTest {
 
-    DeletePersonApi deletePersonApi = new DeletePersonApi();
+    protected DeletePersonApi deletePersonApi = new DeletePersonApi();
 
     @Severity(NORMAL)
     @Test

@@ -18,7 +18,7 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Лист ресурсов")
 public class ListResourcesTest {
 
-    ListResourcesApi listResourcesApi = new ListResourcesApi();
+    protected ListResourcesApi listResourcesApi = new ListResourcesApi();
 
     @Severity(NORMAL)
     @Test

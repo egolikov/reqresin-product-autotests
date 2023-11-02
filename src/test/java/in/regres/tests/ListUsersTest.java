@@ -18,7 +18,7 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Лист сотрудников")
 public class ListUsersTest {
 
-    ListUsersApi listUsersApi = new ListUsersApi();
+    protected ListUsersApi listUsersApi = new ListUsersApi();
 
     @Severity(NORMAL)
     @Test

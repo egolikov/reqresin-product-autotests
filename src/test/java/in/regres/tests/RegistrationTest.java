@@ -21,12 +21,12 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Регистрация")
 public class RegistrationTest {
 
-    String email = TestData.REG_EMAIL;
-    String password = TestData.REG_PASSWORD;
-    String undefinedEmail = TestData.REG_UNDEFINED_EMAIL;
-    String undefinedPassword = TestData.REG_UNDEFINED_PASSWORD;
+    private final String email = TestData.REG_EMAIL;
+    private final String password = TestData.REG_PASSWORD;
+    private final String undefinedEmail = TestData.REG_UNDEFINED_EMAIL;
+    private final String undefinedPassword = TestData.REG_UNDEFINED_PASSWORD;
 
-    RegistrationApi registrationApi = new RegistrationApi();
+    protected RegistrationApi registrationApi = new RegistrationApi();
 
     @Severity(NORMAL)
     @Test

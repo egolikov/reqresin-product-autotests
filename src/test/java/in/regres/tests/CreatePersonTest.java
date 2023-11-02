@@ -20,10 +20,10 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Создание сотрудника")
 public class CreatePersonTest {
 
-    String name = TestData.CREATE_NAME;
-    String job = TestData.CREATE_JOB;
+    private final String name = TestData.CREATE_NAME;
+    private final String job = TestData.CREATE_JOB;
 
-    CreatePersonApi createPersonApi = new CreatePersonApi();
+    protected CreatePersonApi createPersonApi = new CreatePersonApi();
 
     @Severity(NORMAL)
     @Test

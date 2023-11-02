@@ -21,12 +21,12 @@ import static io.qameta.allure.SeverityLevel.NORMAL;
 @Story("Авторизация")
 public class AuthorizationTest {
 
-    String email = TestData.AUTH_EMAIL;
-    String password = TestData.AUTH_PASSWORD;
-    String undefinedEmail = TestData.AUTH_UNDEFINED_EMAIL;
-    String undefinedPassword = TestData.AUTH_UNDEFINED_PASSWORD;
+    private final String email = TestData.AUTH_EMAIL;
+    private final String password = TestData.AUTH_PASSWORD;
+    private final String undefinedEmail = TestData.AUTH_UNDEFINED_EMAIL;
+    private final String undefinedPassword = TestData.AUTH_UNDEFINED_PASSWORD;
 
-    AuthorizationApi authorizationApi = new AuthorizationApi();
+    protected AuthorizationApi authorizationApi = new AuthorizationApi();
 
     @Severity(NORMAL)
     @Test

@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 public class ListUsersDataResponseModel {
-    Integer id;
-    String email;
+    private Integer id;
+    private String email;
     @JsonProperty("first_name")
-    String firstName;
+    private String firstName;
     @JsonProperty("last_name")
-    String lastName;
-    String avatar;
+    private String lastName;
+    private String avatar;
 }
