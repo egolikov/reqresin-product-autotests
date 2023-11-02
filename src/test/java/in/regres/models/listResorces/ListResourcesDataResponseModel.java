@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class ListResourcesDataResponseModel {
-    int id;
+    Integer id;
     String name;
-    int year;
+    Integer year;
     String color;
     @JsonProperty("pantone_value")
     String pantoneValue;

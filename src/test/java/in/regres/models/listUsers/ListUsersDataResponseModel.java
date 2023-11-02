@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class ListUsersDataResponseModel {
-    int id;
+    Integer id;
     String email;
     @JsonProperty("first_name")
     String firstName;

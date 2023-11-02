@@ -7,12 +7,12 @@ import java.util.List;
 
 @Data
 public class ListResourcesResponseModel {
-    int page;
+    Integer page;
     @JsonProperty("per_page")
-    int perPage;
-    int total;
+    Integer perPage;
+    Integer total;
     @JsonProperty("total_pages")
-    int totalPages;
+    Integer totalPages;
     List<ListResourcesDataResponseModel> data;
     ListResourcesSupportResponseModel support;
 }
