@@ -7,7 +7,7 @@ import in.regres.models.person.CreatePersonBodyModel;
 import in.regres.models.person.CreatePersonResponseModel;
 import in.regres.models.person.UpdatePersonBodyModel;
 import in.regres.models.person.UpdatePersonResponseModel;
-import in.regres.tests.data.TestData;
+import in.regres.data.TestData;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Epic(value = "Тестирование API приложения Reqres.in")
 @Feature(value = "Базовая фунциональность приложения Reqres.in")
 @Story("CRUD Операции с сотрудником")
-public class PersonTest {
+public class PersonTest extends BaseTest {
 
     private final String createName = TestData.CREATE_NAME;
     private final String createJob = TestData.CREATE_JOB;

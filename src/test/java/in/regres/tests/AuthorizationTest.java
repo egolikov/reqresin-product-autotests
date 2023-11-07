@@ -4,7 +4,7 @@ import in.regres.api.AuthorizationApi;
 import in.regres.models.authorization.AuthorizationBodyModel;
 import in.regres.models.authorization.AuthorizationErrorModel;
 import in.regres.models.authorization.AuthorizationResponseModel;
-import in.regres.tests.data.TestData;
+import in.regres.data.TestData;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Epic(value = "Тестирование API приложения Reqres.in")
 @Feature(value = "Базовая фунциональность приложения Reqres.in")
 @Story("Авторизация")
-public class AuthorizationTest {
+public class AuthorizationTest extends BaseTest {
 
     private final String email = TestData.AUTH_EMAIL;
     private final String password = TestData.AUTH_PASSWORD;

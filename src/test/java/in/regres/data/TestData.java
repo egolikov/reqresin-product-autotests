@@ -1,4 +1,4 @@
-package in.regres.tests.data;
+package in.regres.data;
 
 public class TestData {
     public static final String AUTH_EMAIL = "eve.holt@reqres.in";

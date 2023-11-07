@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Epic(value = "Тестирование API приложения Reqres.in")
 @Feature(value = "Базовая фунциональность приложения Reqres.in")
 @Story("Лист ресурсов")
-public class ListResourcesTest {
+public class ListResourcesTest extends BaseTest {
 
     protected ListResourcesApi listResourcesApi = new ListResourcesApi();
 
