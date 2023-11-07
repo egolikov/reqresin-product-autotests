@@ -1,6 +1,5 @@
 package in.regres.api;
 
-import com.google.gson.Gson;
 import in.regres.models.updatePerson.UpdatePersonBodyModel;
 import in.regres.models.updatePerson.UpdatePersonResponseModel;
 import in.regres.specs.UpdatePersonSpec;
@@ -15,7 +14,7 @@ public class UpdatePersonApi {
     public UpdatePersonResponseModel successUpdatePersonPut(UpdatePersonBodyModel requestData) {
         return given()
                 .spec(UpdatePersonSpec.updatePersonRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .put("/users/2")
                 .then()
@@ -28,7 +27,7 @@ public class UpdatePersonApi {
     public UpdatePersonResponseModel successUpdatePersonPatch(UpdatePersonBodyModel requestData) {
         return given()
                 .spec(UpdatePersonSpec.updatePersonRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .patch("/users/2")
                 .then()

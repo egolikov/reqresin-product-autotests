@@ -1,10 +1,8 @@
 package in.regres.tests;
 
-import com.google.gson.Gson;
 import in.regres.api.CreatePersonApi;
 import in.regres.models.createPerson.CreatePersonBodyModel;
 import in.regres.models.createPerson.CreatePersonResponseModel;
-import in.regres.tests.asserts.CreatePersonAsserts;
 import in.regres.tests.data.TestData;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.NORMAL;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Owner("Голиков Евгений")
 @Epic(value = "Тестирование API приложения Reqres.in")
@@ -32,16 +31,28 @@ public class CreatePersonTest {
     @DisplayName("Проверка успешного создания сотрудника с Name и Job")
     void successfulCreatePersonTest() {
 
-        step("Отправка запроса на создание сотрудника с Name и Job", () -> {
+        step("Выполнение успешного создания сотрудника с Name и Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(name, job);
             CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            System.setProperty("successfulCreatePersonResponse", new Gson().toJson(response));
-        });
+            final CreatePersonResponseModel successfulCreatePersonResponse = response;
 
-        step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
-            String responseJson = System.getProperty("successfulCreatePersonResponse");
-            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
-            CreatePersonAsserts.validateResponseWithNameAndJob(response);
+            step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
+                assertThat(successfulCreatePersonResponse.getName())
+                        .as("Значение полученного Name из ответа верное")
+                        .isEqualTo("morpheus");
+
+                assertThat(successfulCreatePersonResponse.getJob())
+                        .as("Значение полученной Job из ответа верное")
+                        .isEqualTo("leader");
+
+                assertThat(successfulCreatePersonResponse.getId())
+                        .as("Значение полученного ID из ответа не пустое")
+                        .isNotNull();
+
+                assertThat(successfulCreatePersonResponse.getCreatedAt())
+                        .as("Значение полученного CreatedAt из ответа не пустое")
+                        .isNotNull();
+            });
         });
     }
 
@@ -52,16 +63,28 @@ public class CreatePersonTest {
     @DisplayName("Проверка успешного создания сотрудника без Name")
     void successfulCreatePersonWithoutName() {
 
-        step("Отправка запроса на создание сотрудника без Name", () -> {
+        step("Выполнение успешного создания сотрудника без Name", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(null, job);
             CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            System.setProperty("successfulCreatePersonWithoutNameResponse", new Gson().toJson(response));
-        });
+            final CreatePersonResponseModel successfulCreatePersonWithoutNameResponse = response;
 
-        step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
-            String responseJson = System.getProperty("successfulCreatePersonWithoutNameResponse");
-            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
-            CreatePersonAsserts.validateResponseWithoutName(response);
+            step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
+                assertThat(successfulCreatePersonWithoutNameResponse.getName())
+                        .as("Значение полученного Name из ответа пустое")
+                        .isNull();
+
+                assertThat(successfulCreatePersonWithoutNameResponse.getJob())
+                        .as("Значение полученной Job из ответа верное")
+                        .isEqualTo("leader");
+
+                assertThat(successfulCreatePersonWithoutNameResponse.getId())
+                        .as("Значение полученного ID из ответа не пустое")
+                        .isNotNull();
+
+                assertThat(successfulCreatePersonWithoutNameResponse.getCreatedAt())
+                        .as("Значение полученного CreatedAt из ответа не пустое")
+                        .isNotNull();
+            });
         });
     }
 
@@ -72,16 +95,28 @@ public class CreatePersonTest {
     @DisplayName("Проверка успешного создания сотрудника без Job")
     void successfulCreatePersonWithoutJob() {
 
-        step("Отправка запроса на создание сотрудника без Job", () -> {
+        step("Выполнение успешного создания сотрудника без Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(name, null);
             CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            System.setProperty("successfulCreatePersonWithoutJobResponse", new Gson().toJson(response));
-        });
+            final CreatePersonResponseModel successfulCreatePersonWithoutJobResponse = response;
 
-        step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
-            String responseJson = System.getProperty("successfulCreatePersonWithoutJobResponse");
-            CreatePersonResponseModel response = new Gson().fromJson(responseJson, CreatePersonResponseModel.class);
-            CreatePersonAsserts.validateResponseWithoutJob(response);
+            step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
+                assertThat(successfulCreatePersonWithoutJobResponse.getName())
+                        .as("Значение полученного Name из ответа верное")
+                        .isEqualTo("morpheus");
+
+                assertThat(successfulCreatePersonWithoutJobResponse.getJob())
+                        .as("Значение полученной Job из ответа пустое")
+                        .isNull();
+
+                assertThat(successfulCreatePersonWithoutJobResponse.getId())
+                        .as("Значение полученного ID из ответа не пустое")
+                        .isNotNull();
+
+                assertThat(successfulCreatePersonWithoutJobResponse.getCreatedAt())
+                        .as("Значение полученного CreatedAt из ответа не пустое")
+                        .isNotNull();
+            });
         });
     }
 }

@@ -1,6 +1,5 @@
 package in.regres.api;
 
-import com.google.gson.Gson;
 import in.regres.models.authorization.AuthorizationBodyModel;
 import in.regres.models.authorization.AuthorizationErrorModel;
 import in.regres.models.authorization.AuthorizationResponseModel;
@@ -15,7 +14,7 @@ public class AuthorizationApi {
     public AuthorizationResponseModel successAuth(AuthorizationBodyModel requestData) {
         return given()
                 .spec(AuthorizationSpec.authorizationRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .post("/login")
                 .then()
@@ -28,7 +27,7 @@ public class AuthorizationApi {
     public AuthorizationErrorModel errorAuth(AuthorizationBodyModel requestData) {
         return given()
                 .spec(AuthorizationSpec.authorizationRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .post("/login")
                 .then()

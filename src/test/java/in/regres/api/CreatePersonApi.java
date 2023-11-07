@@ -1,6 +1,5 @@
 package in.regres.api;
 
-import com.google.gson.Gson;
 import in.regres.models.createPerson.CreatePersonBodyModel;
 import in.regres.models.createPerson.CreatePersonResponseModel;
 import in.regres.specs.CreatePersonSpec;
@@ -14,7 +13,7 @@ public class CreatePersonApi {
     public CreatePersonResponseModel successCreatePerson(CreatePersonBodyModel requestData) {
         return given()
                 .spec(CreatePersonSpec.createPersonRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .post("/users")
                 .then()

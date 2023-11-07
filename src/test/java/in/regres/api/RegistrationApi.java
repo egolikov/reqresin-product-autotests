@@ -1,6 +1,5 @@
 package in.regres.api;
 
-import com.google.gson.Gson;
 import in.regres.models.registration.RegistrationBodyModel;
 import in.regres.models.registration.RegistrationErrorModel;
 import in.regres.models.registration.RegistrationResponseModel;
@@ -15,7 +14,7 @@ public class RegistrationApi {
     public RegistrationResponseModel successRegistration(RegistrationBodyModel requestData) {
         return given()
                 .spec(RegistrationSpec.registrationRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .post("/register")
                 .then()
@@ -28,7 +27,7 @@ public class RegistrationApi {
     public RegistrationErrorModel errorRegistration(RegistrationBodyModel requestData) {
         return given()
                 .spec(RegistrationSpec.registrationRequestSpec)
-                .body(new Gson().toJson(requestData))
+                .body(requestData)
                 .when()
                 .post("/register")
                 .then()

@@ -1,10 +1,8 @@
 package in.regres.tests;
 
-import com.google.gson.Gson;
 import in.regres.api.UpdatePersonApi;
 import in.regres.models.updatePerson.UpdatePersonBodyModel;
 import in.regres.models.updatePerson.UpdatePersonResponseModel;
-import in.regres.tests.asserts.UpdatePersonAsserts;
 import in.regres.tests.data.TestData;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.NORMAL;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Owner("Голиков Евгений")
 @Epic(value = "Тестирование API приложения Reqres.in")
@@ -37,13 +36,21 @@ public class UpdatePersonTest {
         step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(name, job);
             UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPut(requestData);
-            System.setProperty("successfulUpdatePutPersonResponse", new Gson().toJson(response));
-        });
+            final UpdatePersonResponseModel successUpdatePersonPutResponse = response;
 
-        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
-            String responseJson = System.getProperty("successfulUpdatePutPersonResponse");
-            UpdatePersonResponseModel response = new Gson().fromJson(responseJson, UpdatePersonResponseModel.class);
-            UpdatePersonAsserts.validateResponseUpdatePut(response);
+            step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
+                assertThat(successUpdatePersonPutResponse.getName())
+                        .as("Значение полученного Name из ответа верное")
+                        .isEqualTo("mike");
+
+                assertThat(successUpdatePersonPutResponse.getJob())
+                        .as("Значение полученной Job из ответа верное")
+                        .isEqualTo("developer");
+
+                assertThat(successUpdatePersonPutResponse.getUpdatedAt())
+                        .as("Значение полученного UpdatedAt из ответа не пустое")
+                        .isNotNull();
+            });
         });
     }
 
@@ -57,13 +64,21 @@ public class UpdatePersonTest {
         step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(nameO, jobO);
             UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPatch(requestData);
-            System.setProperty("successfulUpdatePatchPersonResponse", new Gson().toJson(response));
-        });
+            final UpdatePersonResponseModel successUpdatePersonPatchResponse = response;
 
-        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
-            String responseJson = System.getProperty("successfulUpdatePatchPersonResponse");
-            UpdatePersonResponseModel response = new Gson().fromJson(responseJson, UpdatePersonResponseModel.class);
-            UpdatePersonAsserts.validateResponseUpdatePatch(response);
+            step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
+                assertThat(successUpdatePersonPatchResponse.getName())
+                        .as("Значение полученного Name из ответа верное")
+                        .isEqualTo("oleg");
+
+                assertThat(successUpdatePersonPatchResponse.getJob())
+                        .as("Значение полученной Job из ответа верное")
+                        .isEqualTo("designer");
+
+                assertThat(successUpdatePersonPatchResponse.getUpdatedAt())
+                        .as("Значение полученного UpdatedAt из ответа не пустое")
+                        .isNotNull();
+            });
         });
     }
 }

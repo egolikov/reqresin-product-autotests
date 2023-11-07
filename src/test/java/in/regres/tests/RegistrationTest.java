@@ -1,11 +1,9 @@
 package in.regres.tests;
 
-import com.google.gson.Gson;
 import in.regres.api.RegistrationApi;
 import in.regres.models.registration.RegistrationBodyModel;
 import in.regres.models.registration.RegistrationErrorModel;
 import in.regres.models.registration.RegistrationResponseModel;
-import in.regres.tests.asserts.RegistrationAsserts;
 import in.regres.tests.data.TestData;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.NORMAL;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Owner("Голиков Евгений")
 @Epic(value = "Тестирование API приложения Reqres.in")
@@ -35,16 +34,20 @@ public class RegistrationTest {
     @DisplayName("Проверка успешной регистрации с Email и Password")
     void successfulRegistrationTest() {
 
-        step("Отправка запроса на регистрацию с корретным Email и Password", () -> {
+        step("Выполнение успешной регистрации с Email и Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(email, password);
             RegistrationResponseModel response = registrationApi.successRegistration(requestData);
-            System.setProperty("successfulRegistrationResponse", new Gson().toJson(response));
-        });
+            final RegistrationResponseModel successfulRegistrationResponse = response;
 
-        step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
-            String responseJson = System.getProperty("successfulRegistrationResponse");
-            RegistrationResponseModel response = new Gson().fromJson(responseJson, RegistrationResponseModel.class);
-            RegistrationAsserts.validateResponseWithToken(response);
+            step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
+                assertThat(successfulRegistrationResponse.getId())
+                        .as("Значение полученного ID из ответа верное")
+                        .isEqualTo(4);
+
+                assertThat(successfulRegistrationResponse.getToken())
+                        .as("Значение полученного токена из ответа верное")
+                        .isEqualTo("QpwL5tke4Pnpja7X4");
+            });
         });
     }
 
@@ -55,16 +58,16 @@ public class RegistrationTest {
     @DisplayName("Проверка неуспешной регистрации без Email")
     void registrationWithOutEmailTest() {
 
-        step("Отправка запроса на регистрацию без Email", () -> {
+        step("Выполнение неуспешной регистрации без Email", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(null, password);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            System.setProperty("errorRegWithoutEmailResponse", new Gson().toJson(response));
-        });
+            final RegistrationErrorModel errorRegWithoutEmailResponse = response;
 
-        step("Проверка ответа с ошибкой Регистрации", () -> {
-            String responseJson = System.getProperty("errorRegWithoutEmailResponse");
-            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
-            RegistrationAsserts.validateResponseErrorWithoutEmail(response);
+            step("Проверка ответа с ошибкой Регистрации", () -> {
+                assertThat(errorRegWithoutEmailResponse.getError())
+                        .as("Верный текст с ошибкой в ответе")
+                        .isEqualTo("Missing email or username");
+            });
         });
     }
 
@@ -75,16 +78,16 @@ public class RegistrationTest {
     @DisplayName("Проверка неуспешной регистрации без Password")
     void registrationWithOutPasswordTest() {
 
-        step("Отправка запроса на регистрацию без Password", () -> {
+        step("Выполнение неуспешной регистрации без Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(email, null);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            System.setProperty("errorRegWithoutPasswordResponse", new Gson().toJson(response));
-        });
+            final RegistrationErrorModel errorRegWithoutPasswordResponse = response;
 
-        step("Проверка ответа с ошибкой Регистрации", () -> {
-            String responseJson = System.getProperty("errorRegWithoutPasswordResponse");
-            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
-            RegistrationAsserts.validateResponseErrorWithoutPassword(response);
+            step("Проверка ответа с ошибкой Регистрации", () -> {
+                assertThat(errorRegWithoutPasswordResponse.getError())
+                        .as("Верный текст с ошибкой в ответе")
+                        .isEqualTo("Missing password");
+            });
         });
     }
 
@@ -95,16 +98,16 @@ public class RegistrationTest {
     @DisplayName("Проверка неуспешной регистрации с данными неизвестного пользователя")
     void undefinedUserRegistrationTest() {
 
-        step("Отправка запроса на Регистрацию с неизвестным пользователем", () -> {
+        step("Выполнение неуспешной регистрации с данными неизвестного пользователя", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(undefinedEmail, undefinedPassword);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            System.setProperty("errorRegWithUndefinedData", new Gson().toJson(response));
-        });
+            final RegistrationErrorModel errorRegWithUndefinedData = response;
 
-        step("Проверка ответа с ошибкой Регистрации", () -> {
-            String responseJson = System.getProperty("errorRegWithUndefinedData");
-            RegistrationErrorModel response = new Gson().fromJson(responseJson, RegistrationErrorModel.class);
-            RegistrationAsserts.validateResponseErrorWithUndefinedData(response);
+            step("Проверка ответа с ошибкой Регистрации", () -> {
+                assertThat(errorRegWithUndefinedData.getError())
+                        .as("Верный текст с ошибкой в ответе")
+                        .isEqualTo("Note: Only defined users succeed registration");
+            });
         });
     }
 }
