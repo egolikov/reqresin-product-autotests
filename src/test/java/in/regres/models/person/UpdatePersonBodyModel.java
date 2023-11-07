@@ -1,11 +1,11 @@
-package in.regres.models.createPerson;
+package in.regres.models.person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class CreatePersonBodyModel {
+public class UpdatePersonBodyModel {
     private String name;
     private String job;
 }

@@ -1,7 +1,7 @@
 package in.regres.api;
 
-import in.regres.models.createPerson.CreatePersonBodyModel;
-import in.regres.models.createPerson.CreatePersonResponseModel;
+import in.regres.models.person.CreatePersonBodyModel;
+import in.regres.models.person.CreatePersonResponseModel;
 import in.regres.specs.CreatePersonSpec;
 import io.qameta.allure.Description;
 
