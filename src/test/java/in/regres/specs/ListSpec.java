@@ -11,18 +11,18 @@ import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 
-public class ListResourcesSpec {
+public class ListSpec {
 
     private static final ApiConfig CONFIG = ConfigFactory.create(ApiConfig.class);
 
-    public static RequestSpecification listResourcesRequestSpec = with()
+    public static RequestSpecification listRequestSpec = with()
             .filter(withCustomTemplates())
             .log().uri()
             .log().method()
             .baseUri(CONFIG.baseApiUrl())
             .basePath("/api");
 
-    public static ResponseSpecification listResourcesResponseSpec = new ResponseSpecBuilder()
+    public static ResponseSpecification listResponseSpec = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)
             .expectStatusCode(200)

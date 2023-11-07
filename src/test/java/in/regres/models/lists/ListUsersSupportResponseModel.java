@@ -1,4 +1,4 @@
-package in.regres.models.listUsers;
+package in.regres.models.lists;
 
 import lombok.Data;
 

@@ -1,9 +1,9 @@
 package in.regres.tests;
 
 import in.regres.api.ListUsersApi;
-import in.regres.models.listUsers.ListUsersDataResponseModel;
-import in.regres.models.listUsers.ListUsersResponseModel;
-import in.regres.models.listUsers.ListUsersSupportResponseModel;
+import in.regres.models.lists.ListUsersDataResponseModel;
+import in.regres.models.lists.ListUsersResponseModel;
+import in.regres.models.lists.ListUsersSupportResponseModel;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
