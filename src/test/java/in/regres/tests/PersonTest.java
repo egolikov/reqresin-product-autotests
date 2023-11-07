@@ -3,12 +3,13 @@ package in.regres.tests;
 import in.regres.api.CreatePersonApi;
 import in.regres.api.DeletePersonApi;
 import in.regres.api.UpdatePersonApi;
+import in.regres.config.PersonConfig;
 import in.regres.models.person.CreatePersonBodyModel;
 import in.regres.models.person.CreatePersonResponseModel;
 import in.regres.models.person.UpdatePersonBodyModel;
 import in.regres.models.person.UpdatePersonResponseModel;
-import in.regres.data.TestData;
 import io.qameta.allure.*;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,12 +24,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("CRUD Операции с сотрудником")
 public class PersonTest extends BaseTest {
 
-    private final String createName = TestData.CREATE_NAME;
-    private final String createJob = TestData.CREATE_JOB;
-    private final String updateName = TestData.UPDATE_NAME;
-    private final String updateJob = TestData.UPDATE_JOB;
-    private final String nameO = TestData.ONE_MORE_UPDATE_NAME;
-    private final String jobO = TestData.ONE_MORE_UPDATE_JOB;
+    PersonConfig personConfig = ConfigFactory.create(PersonConfig.class);
+    String createName = personConfig.createName();
+    String createJob = personConfig.createJob();
+    String updateName = personConfig.updateName();
+    String updateJob = personConfig.updateJob();
+    String oneMoreUpdateName = personConfig.oneMoreUpdateName();
+    String oneMoreUpdateJob = personConfig.oneMoreUpdateJob();
 
     protected CreatePersonApi createPersonApi = new CreatePersonApi();
     protected DeletePersonApi deletePersonApi = new DeletePersonApi();
@@ -176,7 +178,7 @@ public class PersonTest extends BaseTest {
     void successfulUpdatePersonWithPatchMethodTest() {
 
         step("Отправка запроса на обновление данных пользователя", () -> {
-            UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(nameO, jobO);
+            UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(oneMoreUpdateName, oneMoreUpdateJob);
             UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPatch(requestData);
             final UpdatePersonResponseModel successUpdatePersonPatchResponse = response;
 

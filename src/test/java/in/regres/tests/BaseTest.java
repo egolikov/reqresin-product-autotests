@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest {
 
-    static ApiConfig config = ConfigFactory.create(ApiConfig.class, System.getProperties());
+    static ApiConfig apiConfig = ConfigFactory.create(ApiConfig.class);
 
     @BeforeAll
     public static void setup() {
-        RestAssured.baseURI = config.baseUrl();
-        RestAssured.basePath = config.basePath();
+        RestAssured.baseURI = apiConfig.baseUrl();
+        RestAssured.basePath = apiConfig.basePath();
     }
 }

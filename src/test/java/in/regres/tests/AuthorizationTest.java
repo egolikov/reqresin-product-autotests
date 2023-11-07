@@ -1,11 +1,12 @@
 package in.regres.tests;
 
 import in.regres.api.AuthorizationApi;
+import in.regres.config.AuthConfig;
 import in.regres.models.authorization.AuthorizationBodyModel;
 import in.regres.models.authorization.AuthorizationErrorModel;
 import in.regres.models.authorization.AuthorizationResponseModel;
-import in.regres.data.TestData;
 import io.qameta.allure.*;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,10 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Авторизация")
 public class AuthorizationTest extends BaseTest {
 
-    private final String email = TestData.AUTH_EMAIL;
-    private final String password = TestData.AUTH_PASSWORD;
-    private final String undefinedEmail = TestData.AUTH_UNDEFINED_EMAIL;
-    private final String undefinedPassword = TestData.AUTH_UNDEFINED_PASSWORD;
+    AuthConfig authConfig = ConfigFactory.create(AuthConfig.class);
+    String authEmail = authConfig.authEmail();
+    String authPassword = authConfig.authPassword();
+    String authUndefinedEmail = authConfig.authUndefinedEmail();
+    String authUndefinedPassword = authConfig.authUndefinedPassword();
 
     protected AuthorizationApi authorizationApi = new AuthorizationApi();
 
@@ -35,7 +37,7 @@ public class AuthorizationTest extends BaseTest {
     void successfulAuthorizationTest() {
 
         step("Выполнение успешной авторизации с Email и Password", () -> {
-            AuthorizationBodyModel requestData = new AuthorizationBodyModel(email, password);
+            AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, authPassword);
             AuthorizationResponseModel response = authorizationApi.successAuth(requestData);
             final AuthorizationResponseModel successfulAuthResponse = response;
 
@@ -55,7 +57,7 @@ public class AuthorizationTest extends BaseTest {
     void authorizationWithOutEmailTest() {
 
         step("Выполнение неуспешной авторизации без Email", () -> {
-            AuthorizationBodyModel requestData = new AuthorizationBodyModel(null, password);
+            AuthorizationBodyModel requestData = new AuthorizationBodyModel(null, authPassword);
             AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
             final AuthorizationErrorModel errorAuthWithoutEmailResponse = response;
 
@@ -75,7 +77,7 @@ public class AuthorizationTest extends BaseTest {
     void authorizationWithOutPasswordTest() {
 
         step("Выполнение неуспешной авторизации без Password", () -> {
-            AuthorizationBodyModel requestData = new AuthorizationBodyModel(email, null);
+            AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, null);
             AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
             final AuthorizationErrorModel errorAuthWithoutPasswordResponse = response;
 
@@ -95,7 +97,7 @@ public class AuthorizationTest extends BaseTest {
     void undefinedUserAuthorizationTest() {
 
         step("Выполнение неуспешной авторизации с данными неизвестного пользователя", () -> {
-            AuthorizationBodyModel requestData = new AuthorizationBodyModel(undefinedEmail, undefinedPassword);
+            AuthorizationBodyModel requestData = new AuthorizationBodyModel(authUndefinedEmail, authUndefinedPassword);
             AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
             final AuthorizationErrorModel errorAuthWithUndefinedData = response;
 

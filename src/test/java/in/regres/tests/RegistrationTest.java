@@ -1,11 +1,12 @@
 package in.regres.tests;
 
 import in.regres.api.RegistrationApi;
+import in.regres.config.RegistrationConfig;
 import in.regres.models.registration.RegistrationBodyModel;
 import in.regres.models.registration.RegistrationErrorModel;
 import in.regres.models.registration.RegistrationResponseModel;
-import in.regres.data.TestData;
 import io.qameta.allure.*;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,10 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Регистрация")
 public class RegistrationTest extends BaseTest {
 
-    private final String email = TestData.REG_EMAIL;
-    private final String password = TestData.REG_PASSWORD;
-    private final String undefinedEmail = TestData.REG_UNDEFINED_EMAIL;
-    private final String undefinedPassword = TestData.REG_UNDEFINED_PASSWORD;
+    RegistrationConfig registrationConfig = ConfigFactory.create(RegistrationConfig.class);
+    String regEmail = registrationConfig.regEmail();
+    String regPassword = registrationConfig.regPassword();
+    String regUndefinedEmail = registrationConfig.regUndefinedEmail();
+    String regUndefinedPassword = registrationConfig.regUndefinedPassword();
 
     protected RegistrationApi registrationApi = new RegistrationApi();
 
@@ -35,7 +37,7 @@ public class RegistrationTest extends BaseTest {
     void successfulRegistrationTest() {
 
         step("Выполнение успешной регистрации с Email и Password", () -> {
-            RegistrationBodyModel requestData = new RegistrationBodyModel(email, password);
+            RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, regPassword);
             RegistrationResponseModel response = registrationApi.successRegistration(requestData);
             final RegistrationResponseModel successfulRegistrationResponse = response;
 
@@ -59,7 +61,7 @@ public class RegistrationTest extends BaseTest {
     void registrationWithOutEmailTest() {
 
         step("Выполнение неуспешной регистрации без Email", () -> {
-            RegistrationBodyModel requestData = new RegistrationBodyModel(null, password);
+            RegistrationBodyModel requestData = new RegistrationBodyModel(null, regPassword);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
             final RegistrationErrorModel errorRegWithoutEmailResponse = response;
 
@@ -79,7 +81,7 @@ public class RegistrationTest extends BaseTest {
     void registrationWithOutPasswordTest() {
 
         step("Выполнение неуспешной регистрации без Password", () -> {
-            RegistrationBodyModel requestData = new RegistrationBodyModel(email, null);
+            RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, null);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
             final RegistrationErrorModel errorRegWithoutPasswordResponse = response;
 
@@ -99,7 +101,7 @@ public class RegistrationTest extends BaseTest {
     void undefinedUserRegistrationTest() {
 
         step("Выполнение неуспешной регистрации с данными неизвестного пользователя", () -> {
-            RegistrationBodyModel requestData = new RegistrationBodyModel(undefinedEmail, undefinedPassword);
+            RegistrationBodyModel requestData = new RegistrationBodyModel(regUndefinedEmail, regUndefinedPassword);
             RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
             final RegistrationErrorModel errorRegWithUndefinedData = response;
 
