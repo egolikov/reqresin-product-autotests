@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Owner("Голиков Евгений")
 @Epic(value = "Тестирование API приложения Reqres.in")
-@Feature(value = "Базовая фунциональность приложения Reqres.in")
+@Feature(value = "Базовая функциональность приложения Reqres.in")
 @Story("CRUD Операции с сотрудником")
 public class PersonTest extends BaseTest {
 
