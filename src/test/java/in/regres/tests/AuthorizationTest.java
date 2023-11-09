@@ -38,8 +38,7 @@ public class AuthorizationTest extends BaseTest {
 
         step("Выполнение успешной авторизации с Email и Password", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, authPassword);
-            AuthorizationResponseModel response = authorizationApi.successAuth(requestData);
-            final AuthorizationResponseModel successfulAuthResponse = response;
+            final AuthorizationResponseModel successfulAuthResponse = authorizationApi.successAuth(requestData);
 
             step("Проверка ответа с токеном на запрос об успешной Авторизации", () -> {
                 assertThat(successfulAuthResponse.getToken())
@@ -58,8 +57,7 @@ public class AuthorizationTest extends BaseTest {
 
         step("Выполнение неуспешной авторизации без Email", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(null, authPassword);
-            AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
-            final AuthorizationErrorModel errorAuthWithoutEmailResponse = response;
+            final AuthorizationErrorModel errorAuthWithoutEmailResponse = authorizationApi.errorAuth(requestData);
 
             step("Проверка ответа с ошибкой Авторизации", () -> {
                 assertThat(errorAuthWithoutEmailResponse.getError())
@@ -78,8 +76,7 @@ public class AuthorizationTest extends BaseTest {
 
         step("Выполнение неуспешной авторизации без Password", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, null);
-            AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
-            final AuthorizationErrorModel errorAuthWithoutPasswordResponse = response;
+            final AuthorizationErrorModel errorAuthWithoutPasswordResponse = authorizationApi.errorAuth(requestData);
 
             step("Проверка ответа с ошибкой Авторизации", () -> {
                 assertThat(errorAuthWithoutPasswordResponse.getError())
@@ -98,8 +95,7 @@ public class AuthorizationTest extends BaseTest {
 
         step("Выполнение неуспешной авторизации с данными неизвестного пользователя", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authUndefinedEmail, authUndefinedPassword);
-            AuthorizationErrorModel response = authorizationApi.errorAuth(requestData);
-            final AuthorizationErrorModel errorAuthWithUndefinedData = response;
+            final AuthorizationErrorModel errorAuthWithUndefinedData = authorizationApi.errorAuth(requestData);
 
             step("Проверка ответа с ошибкой Авторизации", () -> {
                 assertThat(errorAuthWithUndefinedData.getError())

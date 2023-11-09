@@ -31,10 +31,10 @@ public class ListResourcesTest extends BaseTest {
     void successfulFetchListResourcesTest() {
 
         step("Отправка запроса на получение списка Ресурсов", () -> {
-            ListResourcesResponseModel response = listResourcesApi.successfulFetchListResources();
-            final ListResourcesResponseModel successfulFetchListResourcesResponse = response;
+            final ListResourcesResponseModel successfulFetchListResourcesResponse = listResourcesApi.successfulFetchListResources();
             final List<ListResourcesDataResponseModel> successfulFetchListResourcesDataResponse = successfulFetchListResourcesResponse.getData();
             final ListResourcesSupportResponseModel successfulFetchListResourcesSupportResponse = successfulFetchListResourcesResponse.getSupport();
+
             step("Проверка ответа на запрос о получении списка ресурсов", () -> {
 
                 assertThat(successfulFetchListResourcesResponse.getPage())

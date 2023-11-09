@@ -45,8 +45,7 @@ public class PersonTest extends BaseTest {
 
         step("Выполнение успешного создания сотрудника с Name и Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(createName, createJob);
-            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            final CreatePersonResponseModel successfulCreatePersonResponse = response;
+            final CreatePersonResponseModel successfulCreatePersonResponse = createPersonApi.successCreatePerson(requestData);
 
             step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
                 assertThat(successfulCreatePersonResponse.getName())
@@ -77,8 +76,7 @@ public class PersonTest extends BaseTest {
 
         step("Выполнение успешного создания сотрудника без Name", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(null, createJob);
-            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            final CreatePersonResponseModel successfulCreatePersonWithoutNameResponse = response;
+            final CreatePersonResponseModel successfulCreatePersonWithoutNameResponse = createPersonApi.successCreatePerson(requestData);
 
             step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
                 assertThat(successfulCreatePersonWithoutNameResponse.getName())
@@ -109,8 +107,7 @@ public class PersonTest extends BaseTest {
 
         step("Выполнение успешного создания сотрудника без Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(createName, null);
-            CreatePersonResponseModel response = createPersonApi.successCreatePerson(requestData);
-            final CreatePersonResponseModel successfulCreatePersonWithoutJobResponse = response;
+            final CreatePersonResponseModel successfulCreatePersonWithoutJobResponse = createPersonApi.successCreatePerson(requestData);
 
             step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
                 assertThat(successfulCreatePersonWithoutJobResponse.getName())
@@ -151,8 +148,7 @@ public class PersonTest extends BaseTest {
 
         step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(updateName, updateJob);
-            UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPut(requestData);
-            final UpdatePersonResponseModel successUpdatePersonPutResponse = response;
+            final UpdatePersonResponseModel successUpdatePersonPutResponse = updatePersonApi.successUpdatePersonPut(requestData);
 
             step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
                 assertThat(successUpdatePersonPutResponse.getName())
@@ -179,8 +175,7 @@ public class PersonTest extends BaseTest {
 
         step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(oneMoreUpdateName, oneMoreUpdateJob);
-            UpdatePersonResponseModel response = updatePersonApi.successUpdatePersonPatch(requestData);
-            final UpdatePersonResponseModel successUpdatePersonPatchResponse = response;
+            final UpdatePersonResponseModel successUpdatePersonPatchResponse = updatePersonApi.successUpdatePersonPatch(requestData);
 
             step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
                 assertThat(successUpdatePersonPatchResponse.getName())

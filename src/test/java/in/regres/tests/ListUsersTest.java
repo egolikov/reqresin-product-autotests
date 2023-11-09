@@ -31,11 +31,9 @@ public class ListUsersTest extends BaseTest {
     void successfulFetchListUsersTest() {
 
         step("Отправка запроса на получение списка Сотрудников", () -> {
-            ListUsersResponseModel response = listUsersApi.successfulFetchListUsers();
-            final ListUsersResponseModel successfulFetchListUsersResponse = response;
+            final ListUsersResponseModel successfulFetchListUsersResponse = listUsersApi.successfulFetchListUsers();
             final List<ListUsersDataResponseModel> successfulFetchListUsersDataResponse = successfulFetchListUsersResponse.getData();
             final ListUsersSupportResponseModel successfulFetchListUsersSupportResponse = successfulFetchListUsersResponse.getSupport();
-
 
             step("Проверка ответа на запрос о получении списка сотрудников", () -> {
                 assertThat(successfulFetchListUsersResponse.getPage())

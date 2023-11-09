@@ -38,8 +38,7 @@ public class RegistrationTest extends BaseTest {
 
         step("Выполнение успешной регистрации с Email и Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, regPassword);
-            RegistrationResponseModel response = registrationApi.successRegistration(requestData);
-            final RegistrationResponseModel successfulRegistrationResponse = response;
+            final RegistrationResponseModel successfulRegistrationResponse = registrationApi.successRegistration(requestData);
 
             step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
                 assertThat(successfulRegistrationResponse.getId())
@@ -62,8 +61,7 @@ public class RegistrationTest extends BaseTest {
 
         step("Выполнение неуспешной регистрации без Email", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(null, regPassword);
-            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            final RegistrationErrorModel errorRegWithoutEmailResponse = response;
+            final RegistrationErrorModel errorRegWithoutEmailResponse = registrationApi.errorRegistration(requestData);
 
             step("Проверка ответа с ошибкой Регистрации", () -> {
                 assertThat(errorRegWithoutEmailResponse.getError())
@@ -82,8 +80,7 @@ public class RegistrationTest extends BaseTest {
 
         step("Выполнение неуспешной регистрации без Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, null);
-            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            final RegistrationErrorModel errorRegWithoutPasswordResponse = response;
+            final RegistrationErrorModel errorRegWithoutPasswordResponse = registrationApi.errorRegistration(requestData);
 
             step("Проверка ответа с ошибкой Регистрации", () -> {
                 assertThat(errorRegWithoutPasswordResponse.getError())
@@ -102,8 +99,7 @@ public class RegistrationTest extends BaseTest {
 
         step("Выполнение неуспешной регистрации с данными неизвестного пользователя", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regUndefinedEmail, regUndefinedPassword);
-            RegistrationErrorModel response = registrationApi.errorRegistration(requestData);
-            final RegistrationErrorModel errorRegWithUndefinedData = response;
+            final RegistrationErrorModel errorRegWithUndefinedData = registrationApi.errorRegistration(requestData);
 
             step("Проверка ответа с ошибкой Регистрации", () -> {
                 assertThat(errorRegWithUndefinedData.getError())
