@@ -43,27 +43,27 @@ public class PersonTest extends BaseTest {
     @DisplayName("Проверка успешного создания сотрудника с Name и Job")
     void successfulCreatePersonTest() {
 
-        step("Выполнение успешного создания сотрудника с Name и Job", () -> {
+        final CreatePersonResponseModel successfulCreatePersonResponse = step("Выполнение успешного создания сотрудника с Name и Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(createName, createJob);
-            final CreatePersonResponseModel successfulCreatePersonResponse = createPersonApi.successCreatePerson(requestData);
+            return createPersonApi.successCreatePerson(requestData);
+        });
 
-            step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
-                assertThat(successfulCreatePersonResponse.getName())
-                        .as("Значение полученного Name из ответа верное")
-                        .isEqualTo("morpheus");
+        step("Проверка ответа на запрос об успешном создании сотрудника с Name и Job", () -> {
+            assertThat(successfulCreatePersonResponse.getName())
+                    .as("Значение полученного Name из ответа верное")
+                    .isEqualTo("morpheus");
 
-                assertThat(successfulCreatePersonResponse.getJob())
-                        .as("Значение полученной Job из ответа верное")
-                        .isEqualTo("leader");
+            assertThat(successfulCreatePersonResponse.getJob())
+                    .as("Значение полученной Job из ответа верное")
+                    .isEqualTo("leader");
 
-                assertThat(successfulCreatePersonResponse.getId())
-                        .as("Значение полученного ID из ответа не пустое")
-                        .isNotNull();
+            assertThat(successfulCreatePersonResponse.getId())
+                    .as("Значение полученного ID из ответа не пустое")
+                    .isNotNull();
 
-                assertThat(successfulCreatePersonResponse.getCreatedAt())
-                        .as("Значение полученного CreatedAt из ответа не пустое")
-                        .isNotNull();
-            });
+            assertThat(successfulCreatePersonResponse.getCreatedAt())
+                    .as("Значение полученного CreatedAt из ответа не пустое")
+                    .isNotNull();
         });
     }
 
@@ -74,27 +74,27 @@ public class PersonTest extends BaseTest {
     @DisplayName("Проверка успешного создания сотрудника без Name")
     void successfulCreatePersonWithoutName() {
 
-        step("Выполнение успешного создания сотрудника без Name", () -> {
+        final CreatePersonResponseModel successfulCreatePersonWithoutNameResponse = step("Выполнение успешного создания сотрудника без Name", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(null, createJob);
-            final CreatePersonResponseModel successfulCreatePersonWithoutNameResponse = createPersonApi.successCreatePerson(requestData);
+            return createPersonApi.successCreatePerson(requestData);
+        });
 
-            step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
-                assertThat(successfulCreatePersonWithoutNameResponse.getName())
-                        .as("Значение полученного Name из ответа пустое")
-                        .isNull();
+        step("Проверка ответа на запрос об успешном создании сотрудника без Name", () -> {
+            assertThat(successfulCreatePersonWithoutNameResponse.getName())
+                    .as("Значение полученного Name из ответа пустое")
+                    .isNull();
 
-                assertThat(successfulCreatePersonWithoutNameResponse.getJob())
-                        .as("Значение полученной Job из ответа верное")
-                        .isEqualTo("leader");
+            assertThat(successfulCreatePersonWithoutNameResponse.getJob())
+                    .as("Значение полученной Job из ответа верное")
+                    .isEqualTo("leader");
 
-                assertThat(successfulCreatePersonWithoutNameResponse.getId())
-                        .as("Значение полученного ID из ответа не пустое")
-                        .isNotNull();
+            assertThat(successfulCreatePersonWithoutNameResponse.getId())
+                    .as("Значение полученного ID из ответа не пустое")
+                    .isNotNull();
 
-                assertThat(successfulCreatePersonWithoutNameResponse.getCreatedAt())
-                        .as("Значение полученного CreatedAt из ответа не пустое")
-                        .isNotNull();
-            });
+            assertThat(successfulCreatePersonWithoutNameResponse.getCreatedAt())
+                    .as("Значение полученного CreatedAt из ответа не пустое")
+                    .isNotNull();
         });
     }
 
@@ -105,27 +105,27 @@ public class PersonTest extends BaseTest {
     @DisplayName("Проверка успешного создания сотрудника без Job")
     void successfulCreatePersonWithoutJob() {
 
-        step("Выполнение успешного создания сотрудника без Job", () -> {
+        final CreatePersonResponseModel successfulCreatePersonWithoutJobResponse = step("Выполнение успешного создания сотрудника без Job", () -> {
             CreatePersonBodyModel requestData = new CreatePersonBodyModel(createName, null);
-            final CreatePersonResponseModel successfulCreatePersonWithoutJobResponse = createPersonApi.successCreatePerson(requestData);
+            return createPersonApi.successCreatePerson(requestData);
+        });
 
-            step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
-                assertThat(successfulCreatePersonWithoutJobResponse.getName())
-                        .as("Значение полученного Name из ответа верное")
-                        .isEqualTo("morpheus");
+        step("Проверка ответа на запрос об успешном создании сотрудника без Job", () -> {
+            assertThat(successfulCreatePersonWithoutJobResponse.getName())
+                    .as("Значение полученного Name из ответа верное")
+                    .isEqualTo("morpheus");
 
-                assertThat(successfulCreatePersonWithoutJobResponse.getJob())
-                        .as("Значение полученной Job из ответа пустое")
-                        .isNull();
+            assertThat(successfulCreatePersonWithoutJobResponse.getJob())
+                    .as("Значение полученной Job из ответа пустое")
+                    .isNull();
 
-                assertThat(successfulCreatePersonWithoutJobResponse.getId())
-                        .as("Значение полученного ID из ответа не пустое")
-                        .isNotNull();
+            assertThat(successfulCreatePersonWithoutJobResponse.getId())
+                    .as("Значение полученного ID из ответа не пустое")
+                    .isNotNull();
 
-                assertThat(successfulCreatePersonWithoutJobResponse.getCreatedAt())
-                        .as("Значение полученного CreatedAt из ответа не пустое")
-                        .isNotNull();
-            });
+            assertThat(successfulCreatePersonWithoutJobResponse.getCreatedAt())
+                    .as("Значение полученного CreatedAt из ответа не пустое")
+                    .isNotNull();
         });
     }
 
@@ -146,23 +146,23 @@ public class PersonTest extends BaseTest {
     @DisplayName("Проверка успешного обновления данных пользователя через метод PUT")
     void successfulUpdatePersonWithPutMethodTest() {
 
-        step("Отправка запроса на обновление данных пользователя", () -> {
+        final UpdatePersonResponseModel successUpdatePersonPutResponse = step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(updateName, updateJob);
-            final UpdatePersonResponseModel successUpdatePersonPutResponse = updatePersonApi.successUpdatePersonPut(requestData);
+            return updatePersonApi.successUpdatePersonPut(requestData);
+        });
 
-            step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
-                assertThat(successUpdatePersonPutResponse.getName())
-                        .as("Значение полученного Name из ответа верное")
-                        .isEqualTo("mike");
+        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PUT", () -> {
+            assertThat(successUpdatePersonPutResponse.getName())
+                    .as("Значение полученного Name из ответа верное")
+                    .isEqualTo("mike");
 
-                assertThat(successUpdatePersonPutResponse.getJob())
-                        .as("Значение полученной Job из ответа верное")
-                        .isEqualTo("developer");
+            assertThat(successUpdatePersonPutResponse.getJob())
+                    .as("Значение полученной Job из ответа верное")
+                    .isEqualTo("developer");
 
-                assertThat(successUpdatePersonPutResponse.getUpdatedAt())
-                        .as("Значение полученного UpdatedAt из ответа не пустое")
-                        .isNotNull();
-            });
+            assertThat(successUpdatePersonPutResponse.getUpdatedAt())
+                    .as("Значение полученного UpdatedAt из ответа не пустое")
+                    .isNotNull();
         });
     }
 
@@ -173,23 +173,23 @@ public class PersonTest extends BaseTest {
     @DisplayName("Проверка успешного обновления данных пользователя через метод PATCH")
     void successfulUpdatePersonWithPatchMethodTest() {
 
-        step("Отправка запроса на обновление данных пользователя", () -> {
+        final UpdatePersonResponseModel successUpdatePersonPatchResponse = step("Отправка запроса на обновление данных пользователя", () -> {
             UpdatePersonBodyModel requestData = new UpdatePersonBodyModel(oneMoreUpdateName, oneMoreUpdateJob);
-            final UpdatePersonResponseModel successUpdatePersonPatchResponse = updatePersonApi.successUpdatePersonPatch(requestData);
+            return updatePersonApi.successUpdatePersonPatch(requestData);
+        });
 
-            step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
-                assertThat(successUpdatePersonPatchResponse.getName())
-                        .as("Значение полученного Name из ответа верное")
-                        .isEqualTo("oleg");
+        step("Проверка ответа на запрос об успешном обновлении сотрудника с методом PATCH", () -> {
+            assertThat(successUpdatePersonPatchResponse.getName())
+                    .as("Значение полученного Name из ответа верное")
+                    .isEqualTo("oleg");
 
-                assertThat(successUpdatePersonPatchResponse.getJob())
-                        .as("Значение полученной Job из ответа верное")
-                        .isEqualTo("designer");
+            assertThat(successUpdatePersonPatchResponse.getJob())
+                    .as("Значение полученной Job из ответа верное")
+                    .isEqualTo("designer");
 
-                assertThat(successUpdatePersonPatchResponse.getUpdatedAt())
-                        .as("Значение полученного UpdatedAt из ответа не пустое")
-                        .isNotNull();
-            });
+            assertThat(successUpdatePersonPatchResponse.getUpdatedAt())
+                    .as("Значение полученного UpdatedAt из ответа не пустое")
+                    .isNotNull();
         });
     }
 }

@@ -36,19 +36,19 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Проверка успешной регистрации с Email и Password")
     void successfulRegistrationTest() {
 
-        step("Выполнение успешной регистрации с Email и Password", () -> {
+        final RegistrationResponseModel successfulRegistrationResponse = step("Выполнение успешной регистрации с Email и Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, regPassword);
-            final RegistrationResponseModel successfulRegistrationResponse = registrationApi.successRegistration(requestData);
+            return registrationApi.successRegistration(requestData);
+        });
 
-            step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
-                assertThat(successfulRegistrationResponse.getId())
-                        .as("Значение полученного ID из ответа верное")
-                        .isEqualTo(4);
+        step("Проверка ответа с токеном на запрос об успешной Регистрации", () -> {
+            assertThat(successfulRegistrationResponse.getId())
+                    .as("Значение полученного ID из ответа верное")
+                    .isEqualTo(4);
 
-                assertThat(successfulRegistrationResponse.getToken())
-                        .as("Значение полученного токена из ответа верное")
-                        .isEqualTo("QpwL5tke4Pnpja7X4");
-            });
+            assertThat(successfulRegistrationResponse.getToken())
+                    .as("Значение полученного токена из ответа верное")
+                    .isEqualTo("QpwL5tke4Pnpja7X4");
         });
     }
 
@@ -59,15 +59,15 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Проверка неуспешной регистрации без Email")
     void registrationWithOutEmailTest() {
 
-        step("Выполнение неуспешной регистрации без Email", () -> {
+        final RegistrationErrorModel errorRegWithoutEmailResponse = step("Выполнение неуспешной регистрации без Email", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(null, regPassword);
-            final RegistrationErrorModel errorRegWithoutEmailResponse = registrationApi.errorRegistration(requestData);
+            return registrationApi.errorRegistration(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Регистрации", () -> {
-                assertThat(errorRegWithoutEmailResponse.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("Missing email or username");
-            });
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            assertThat(errorRegWithoutEmailResponse.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("Missing email or username");
         });
     }
 
@@ -78,15 +78,15 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Проверка неуспешной регистрации без Password")
     void registrationWithOutPasswordTest() {
 
-        step("Выполнение неуспешной регистрации без Password", () -> {
+        final RegistrationErrorModel errorRegWithoutPasswordResponse = step("Выполнение неуспешной регистрации без Password", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regEmail, null);
-            final RegistrationErrorModel errorRegWithoutPasswordResponse = registrationApi.errorRegistration(requestData);
+            return registrationApi.errorRegistration(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Регистрации", () -> {
-                assertThat(errorRegWithoutPasswordResponse.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("Missing password");
-            });
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            assertThat(errorRegWithoutPasswordResponse.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("Missing password");
         });
     }
 
@@ -97,15 +97,15 @@ public class RegistrationTest extends BaseTest {
     @DisplayName("Проверка неуспешной регистрации с данными неизвестного пользователя")
     void undefinedUserRegistrationTest() {
 
-        step("Выполнение неуспешной регистрации с данными неизвестного пользователя", () -> {
+        final RegistrationErrorModel errorRegWithUndefinedData = step("Выполнение неуспешной регистрации с данными неизвестного пользователя", () -> {
             RegistrationBodyModel requestData = new RegistrationBodyModel(regUndefinedEmail, regUndefinedPassword);
-            final RegistrationErrorModel errorRegWithUndefinedData = registrationApi.errorRegistration(requestData);
+            return registrationApi.errorRegistration(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Регистрации", () -> {
-                assertThat(errorRegWithUndefinedData.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("Note: Only defined users succeed registration");
-            });
+        step("Проверка ответа с ошибкой Регистрации", () -> {
+            assertThat(errorRegWithUndefinedData.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("Note: Only defined users succeed registration");
         });
     }
 }

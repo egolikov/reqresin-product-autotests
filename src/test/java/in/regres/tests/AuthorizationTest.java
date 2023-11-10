@@ -36,15 +36,15 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Проверка успешной авторизации с Email и Password")
     void successfulAuthorizationTest() {
 
-        step("Выполнение успешной авторизации с Email и Password", () -> {
+        final AuthorizationResponseModel successfulAuthResponse = step("Выполнение успешной авторизации с Email и Password", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, authPassword);
-            final AuthorizationResponseModel successfulAuthResponse = authorizationApi.successAuth(requestData);
+            return authorizationApi.successAuth(requestData);
+        });
 
-            step("Проверка ответа с токеном на запрос об успешной Авторизации", () -> {
-                assertThat(successfulAuthResponse.getToken())
-                        .as("Значение полученного токена из ответа верное")
-                        .isEqualTo("QpwL5tke4Pnpja7X4");
-            });
+        step("Проверка ответа с токеном на запрос об успешной Авторизации", () -> {
+            assertThat(successfulAuthResponse.getToken())
+                    .as("Значение полученного токена из ответа верное")
+                    .isEqualTo("QpwL5tke4Pnpja7X4");
         });
     }
 
@@ -55,15 +55,15 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Проверка неуспешной авторизации без Email")
     void authorizationWithOutEmailTest() {
 
-        step("Выполнение неуспешной авторизации без Email", () -> {
+        final AuthorizationErrorModel errorAuthWithoutEmailResponse = step("Выполнение неуспешной авторизации без Email", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(null, authPassword);
-            final AuthorizationErrorModel errorAuthWithoutEmailResponse = authorizationApi.errorAuth(requestData);
+            return authorizationApi.errorAuth(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Авторизации", () -> {
-                assertThat(errorAuthWithoutEmailResponse.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("Missing email or username");
-            });
+        step("Проверка ответа с ошибкой Авторизации", () -> {
+            assertThat(errorAuthWithoutEmailResponse.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("Missing email or username");
         });
     }
 
@@ -74,15 +74,15 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Проверка неуспешной авторизации без Password")
     void authorizationWithOutPasswordTest() {
 
-        step("Выполнение неуспешной авторизации без Password", () -> {
+        final AuthorizationErrorModel errorAuthWithoutPasswordResponse = step("Выполнение неуспешной авторизации без Password", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authEmail, null);
-            final AuthorizationErrorModel errorAuthWithoutPasswordResponse = authorizationApi.errorAuth(requestData);
+            return authorizationApi.errorAuth(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Авторизации", () -> {
-                assertThat(errorAuthWithoutPasswordResponse.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("Missing password");
-            });
+        step("Проверка ответа с ошибкой Авторизации", () -> {
+            assertThat(errorAuthWithoutPasswordResponse.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("Missing password");
         });
     }
 
@@ -93,15 +93,15 @@ public class AuthorizationTest extends BaseTest {
     @DisplayName("Проверка неуспешной авторизации с данными неизвестного пользователя")
     void undefinedUserAuthorizationTest() {
 
-        step("Выполнение неуспешной авторизации с данными неизвестного пользователя", () -> {
+        final AuthorizationErrorModel errorAuthWithUndefinedData = step("Выполнение неуспешной авторизации с данными неизвестного пользователя", () -> {
             AuthorizationBodyModel requestData = new AuthorizationBodyModel(authUndefinedEmail, authUndefinedPassword);
-            final AuthorizationErrorModel errorAuthWithUndefinedData = authorizationApi.errorAuth(requestData);
+            return authorizationApi.errorAuth(requestData);
+        });
 
-            step("Проверка ответа с ошибкой Авторизации", () -> {
-                assertThat(errorAuthWithUndefinedData.getError())
-                        .as("Верный текст с ошибкой в ответе")
-                        .isEqualTo("user not found");
-            });
+        step("Проверка ответа с ошибкой Авторизации", () -> {
+            assertThat(errorAuthWithUndefinedData.getError())
+                    .as("Верный текст с ошибкой в ответе")
+                    .isEqualTo("user not found");
         });
     }
 }
